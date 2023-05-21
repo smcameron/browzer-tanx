@@ -8,3 +8,5 @@ browzer-tanx.wasm:	browzer-tanx.c Makefile
 browzer-tanx:	browzer-tanx.c Makefile
 	gcc -O3 -Wall -Wextra -Wstrict-prototypes -o browzer-tanx browzer-tanx.c
 
+clean:
+	rm -f browzer-tanx browzer-tanx.html browzer-tanx.js browzer-tanx.wasm
