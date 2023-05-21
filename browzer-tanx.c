@@ -20,11 +20,36 @@
 */
 
 #include <stdio.h>
+#include <unistd.h>
+#include <SDL.h>
+#ifdef BTWASM
+#include <emscripten.h>
+#endif
 
 #define UNUSED __attribute__((unused))
 
+void main_loop(void)
+{
+
+}
+
 int main(UNUSED int argc, UNUSED char *argv[])
 {
-	printf("Browzer-Tanx!\n");
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		fprintf(stderr, "Unable to initialize SDL (Video):  %s\n", SDL_GetError());
+		return 1;
+	}
+	if (SDL_Init(SDL_INIT_EVENTS) != 0) {
+		fprintf(stderr, "Unable to initialize SDL (Events):  %s\n", SDL_GetError());
+		return 1;
+	}
+#ifdef BTWASM
+	emscripten_set_main_loop(main_loop, 60, 1);
+#else
+	do {
+		main_loop();
+		usleep(16);
+	} while (1);
+#endif
 }
 
