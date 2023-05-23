@@ -2,7 +2,7 @@
 SDL2CFLAGS=$(shell pkg-config sdl2 --cflags)
 SDL2LDFLAGS=$(shell pkg-config sdl2 --libs)
 
-CFLAGS=-O3 -Wall -Wextra -Wstrict-prototypes ${SDL2CFLAGS}
+CFLAGS=-O3 -Wall -Wextra -Wstrict-prototypes ${SDL2CFLAGS} -fsanitize=undefined -fsanitize=address
 
 
 all:	browzer-tanx.wasm browzer-tanx
